@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "formik": "^2.4.6",
+    "gsap": "^3.13.0",
+    "nodemon": "^3.1.10",
+    "react-router-dom": "^7.7.1",
+    "yup": "^1.6.1"
+  },
+  "name": "stocks-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KRohanGit/Stock_Monitoring.git"
+  },
+  "author": "Rohan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KRohanGit/Stock_Monitoring/issues"
+  },
+  "homepage": "https://github.com/KRohanGit/Stock_Monitoring#readme",
+  "description": ""
+}
