@@ -11,6 +11,11 @@
   color: #495057 !important;
 }
 
+.hover-bg-dark:hover {
+  background-color: #343a40 !important;
+  color: #ffffff !important;
+}
+
 /* Ensure Bootstrap nav-link styles take precedence */
 .nav-pills .nav-link {
   border-radius: 0.375rem !important;

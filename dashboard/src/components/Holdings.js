@@ -1,19 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { VerticalGraph } from "./VerticalGraph";
-
-import { holdings } from "../data/data";
+import axios from "axios";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Use local data instead of API call
-    setAllHoldings(holdings);
+    const fetchHoldings = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://localhost:3002/allHoldings');
+        console.log('Holdings data:', response.data);
+        setAllHoldings(response.data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching holdings:', err);
+        setError('Failed to fetch holdings data');
+        // Fallback to local data if API fails
+        setAllHoldings([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHoldings();
   }, []);
 
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  const labels = allHoldings.map((subArray) => subArray["name"]);
-
+  const labels = allHoldings.map((stock) => stock["name"]);
+//in the above line the stcok is an subarray of objects, each object representing a stock with properties like name, price, etc.
+  // This maps the names of the stocks to create labels for the graph.
   const data = {
     labels,
     datasets: [
@@ -24,6 +42,27 @@ const Holdings = () => {
       },
     ],
   };
+//The above will create a dataset for the graph, where each stock's price is represented as a data point. that will be seen in the graph as bars representing the price of each stock.
+  //
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        <h6 className="alert-heading">Error!</h6>
+        {error}
+      </div>
+    );
+  }
 
   // export const data = {
   //   labels,
@@ -90,18 +129,26 @@ const Holdings = () => {
       <div className="row">
         <div className="col">
           <h5>
-            29,875.<span>55</span>{" "}
+            {allHoldings.reduce((total, stock) => total + (stock.avg * stock.qty), 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </h5>
           <p>Total investment</p>
         </div>
         <div className="col">
           <h5>
-            31,428.<span>95</span>{" "}
+            {allHoldings.reduce((total, stock) => total + (stock.price * stock.qty), 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </h5>
           <p>Current value</p>
         </div>
         <div className="col">
-          <h5>1,553.40 (+5.20%)</h5>
+          <h5>
+            {(() => {
+              const totalInvestment = allHoldings.reduce((total, stock) => total + (stock.avg * stock.qty), 0);
+              const currentValue = allHoldings.reduce((total, stock) => total + (stock.price * stock.qty), 0);
+              const profitLoss = currentValue - totalInvestment;
+              const percentage = totalInvestment > 0 ? ((profitLoss / totalInvestment) * 100).toFixed(2) : 0;
+              return `${profitLoss >= 0 ? '+' : ''}${profitLoss.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (${profitLoss >= 0 ? '+' : ''}${percentage}%)`;
+            })()}
+          </h5>
           <p>P&L</p>
         </div>
       </div>

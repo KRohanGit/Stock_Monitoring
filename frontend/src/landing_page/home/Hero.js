@@ -18,10 +18,15 @@ function hero() {
                 Advanced online platform for comprehensive stock analysis and seamless trading experience
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mb-4">
-                <button className="btn btn-primary btn-lg px-4 py-3 rounded-pill shadow-sm">
+                <a 
+                  href="http://localhost:3001/signup"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary btn-lg px-4 py-3 rounded-pill shadow-sm text-decoration-none"
+                >
                   <i className="fas fa-rocket me-2"></i>
                   Get Started
-                </button>
+                </a>
                 <button className="btn btn-outline-secondary btn-lg px-4 py-3 rounded-pill">
                   <i className="fas fa-play me-2"></i>
                   Watch Demo

@@ -1,12 +1,55 @@
-import React from "react";
-import { positions } from "../data/data";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Positions = () => {
+  const [allPositions, setAllPositions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPositions = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://localhost:3002/allPositions');
+        console.log('Positions data:', response.data);
+        setAllPositions(response.data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching positions:', err);
+        setError('Failed to fetch positions data');
+        // Fallback to empty array if API fails
+        setAllPositions([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPositions();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        <h6 className="alert-heading">Error!</h6>
+        {error}
+      </div>
+    );
+  }
   return (
     <div className="container-fluid">
       <div className="row mb-3">
         <div className="col">
-          <h3 className="h4 text-dark fw-semibold">Positions ({positions.length})</h3>
+          <h3 className="h4 text-dark fw-semibold">Positions ({allPositions.length})</h3>
         </div>
       </div>
 
@@ -26,7 +69,7 @@ const Positions = () => {
                 </tr>
               </thead>
               <tbody>
-                {positions.map((stock, index) => {
+                {allPositions.map((stock, index) => {
                   const curValue = stock.price * stock.qty;
                   const isProfit = curValue - stock.avg * stock.qty >= 0.0;
                   const profitLoss = (curValue - stock.avg * stock.qty).toFixed(2);

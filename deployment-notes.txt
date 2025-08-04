@@ -1,0 +1,22 @@
+// Environment Configuration for Deployment
+
+// 1. Backend - Create production environment variables
+MONGO_URL=your_mongodb_atlas_connection_string
+TOKEN_KEY=your_production_jwt_secret
+PORT=3002
+NODE_ENV=production
+
+// 2. Frontend - Update URLs in components
+// Replace all localhost:3001 with production dashboard URL
+// Replace all localhost:3002 with production backend URL
+
+// 3. Dashboard - Update API endpoints
+// Replace all localhost:3002 with production backend URL
+
+// 4. CORS Configuration - Add production URLs
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001', 
+  'https://your-frontend.vercel.app',
+  'https://your-dashboard.vercel.app'
+];

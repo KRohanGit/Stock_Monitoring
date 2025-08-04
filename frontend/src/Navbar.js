@@ -25,9 +25,24 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-item me-4">
-              <Link className="nav-link fw-semibold" to="/signup">
+              <a 
+                className="nav-link fw-semibold" 
+                href="http://localhost:3001/signup"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Sign Up
-              </Link>
+              </a>
+            </li>
+            <li className="nav-item me-4">
+              <a 
+                className="nav-link fw-semibold" 
+                href="http://localhost:3001/login"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Login
+              </a>
             </li>
             <li className="nav-item me-4">
               <Link className="nav-link fw-semibold" to="/about">

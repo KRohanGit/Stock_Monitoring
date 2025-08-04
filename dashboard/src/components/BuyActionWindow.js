@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+
+import axios from "axios";
 
 import GeneralContext from "./GeneralContext";
 
@@ -8,20 +9,38 @@ import "./BuyActionWindow.css";
 const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleBuyClick = () => {
-    // Temporarily disabled API call - would make call to backend when available
-    // axios.post("http://localhost:3002/newOrder", {
-    //   name: uid,
-    //   qty: stockQuantity,
-    //   price: stockPrice,
-    //   mode: "BUY",
-    // });
-
-    // For now, just show success message and close window
-    alert(`Order placed successfully! Stock: ${uid}, Qty: ${stockQuantity}, Price: ${stockPrice}`);
+  const handleBuyClick = async (e) => {
+    e.preventDefault(); // Prevent any default behavior
     
-    GeneralContext.closeBuyWindow();
+    if (stockQuantity <= 0 || stockPrice <= 0) {
+      alert("Please enter valid quantity and price.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:3002/newOrder", {
+        name: uid,
+        qty: parseInt(stockQuantity),
+        price: parseFloat(stockPrice),
+        mode: "BUY",
+      });
+
+      console.log('Order response:', response.data);
+      
+      // Show success message and close window
+      alert(`Order placed successfully! Stock: ${uid}, Qty: ${stockQuantity}, Price: ₹${stockPrice}`);
+      
+      GeneralContext.closeBuyWindow();
+    } catch (error) {
+      console.error('Error placing order:', error);
+      alert('Failed to place order. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCancelClick = () => {
@@ -59,12 +78,21 @@ const BuyActionWindow = ({ uid }) => {
       <div className="buttons">
         <span>Margin required ₹140.65</span>
         <div>
-          <Link className="btn btn-blue" onClick={handleBuyClick}>
-            Buy
-          </Link>
-          <Link to="" className="btn btn-grey" onClick={handleCancelClick}>
+          <button 
+            className={`btn btn-blue ${isLoading ? 'disabled' : ''}`} 
+            onClick={handleBuyClick}
+            disabled={isLoading}
+            style={{ opacity: isLoading ? 0.6 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
+          >
+            {isLoading ? 'Placing Order...' : 'Buy'}
+          </button>
+          <button 
+            type="button" 
+            className="btn btn-grey" 
+            onClick={handleCancelClick}
+          >
             Cancel
-          </Link>
+          </button>
         </div>
       </div>
     </div>
