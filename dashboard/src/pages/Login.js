@@ -46,9 +46,10 @@ const Login = () => {
       if (success) {
         handleSuccess(message);
         console.log("Login successful, navigating to dashboard");
+        // Wait a bit longer for cookie to be set properly
         setTimeout(() => {
-          navigate("/dashboard");
-        }, 1000);
+          navigate("/");
+        }, 1500);
       } else {
         handleError(message);
       }

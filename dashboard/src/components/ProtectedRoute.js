@@ -2,25 +2,18 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { API_BASE_URL } from "../config/api";
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
-  const [username, setUsername] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const verifyCookie = async () => {
-      if (!cookies.token) {
-        console.log("No token found, redirecting to login");
-        navigate("/login");
-        setLoading(false);
-        return;
-      }
       try {
+        console.log("Checking authentication...");
         const { data } = await axios.post(
           `${API_BASE_URL}/auth`,
           {},
@@ -29,24 +22,24 @@ const ProtectedRoute = ({ children }) => {
         console.log("Auth verification response:", data);
         const { status, user } = data;
         if (status) {
-          setUsername(user);
           setIsAuthenticated(true);
           console.log("User authenticated:", user);
         } else {
-          console.log("Auth failed, removing cookie");
-          removeCookie("token");
+          console.log("Auth failed, redirecting to login");
           navigate("/login");
         }
       } catch (error) {
         console.error("Auth verification failed:", error);
-        removeCookie("token");
         navigate("/login");
       } finally {
         setLoading(false);
       }
     };
-    verifyCookie();
-  }, [cookies.token, navigate, removeCookie]); // Only depend on token, not all cookies
+    
+    // Small delay to ensure cookie is set after navigation
+    const timer = setTimeout(verifyCookie, 100);
+    return () => clearTimeout(timer);
+  }, [navigate]);
 
   if (loading) {
     return (

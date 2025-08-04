@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import axios from "axios";
 import { API_BASE_URL } from "../config/api";
@@ -11,6 +11,8 @@ const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const { closeBuyWindow } = useContext(GeneralContext);
 
   const handleBuyClick = async (e) => {
     e.preventDefault(); // Prevent any default behavior
@@ -35,7 +37,7 @@ const BuyActionWindow = ({ uid }) => {
       // Show success message and close window
       alert(`Order placed successfully! Stock: ${uid}, Qty: ${stockQuantity}, Price: ₹${stockPrice}`);
       
-      GeneralContext.closeBuyWindow();
+      closeBuyWindow();
     } catch (error) {
       console.error('Error placing order:', error);
       alert('Failed to place order. Please try again.');
@@ -45,7 +47,7 @@ const BuyActionWindow = ({ uid }) => {
   };
 
   const handleCancelClick = () => {
-    GeneralContext.closeBuyWindow();
+    closeBuyWindow();
   };
 
   return (

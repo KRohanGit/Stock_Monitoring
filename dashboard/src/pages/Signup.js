@@ -48,7 +48,7 @@ const Signup = () => {
         handleSuccess(message);
         console.log("Signup successful, navigating to dashboard");
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/");
         }, 1000);
       } else {
         handleError(message);
