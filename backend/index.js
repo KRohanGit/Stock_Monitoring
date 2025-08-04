@@ -31,6 +31,15 @@ app.use(bodyParser.json()); // Middleware for parsing JSON
 // Middleware for parsing JSON
 app.use(express.json());
 
+// Health check endpoint for Railway
+app.get("/health", (req, res) => {
+  res.status(200).json({ 
+    status: "OK", 
+    timestamp: new Date().toISOString(),
+    service: "Rapid Stocks API"
+  });
+});
+
 // Authentication Routes
 app.use("/auth", authRoute);
 
@@ -202,7 +211,7 @@ mongoose
   .then(() => {
     console.log("Connected to MongoDB successfully!");
 
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`App started on port ${PORT}!`);
     });
   })
