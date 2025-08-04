@@ -18,20 +18,12 @@ function App() {
       <Router>
         <ThemeContextProvider>
           <Routes>
-            {/* Public Routes */}
+            {/* Authentication Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             
             {/* Protected Dashboard Routes */}
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Menu />
-                <TopBar />
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            
-            <Route path="/dashboard/*" element={
+            <Route path="/*" element={
               <ProtectedRoute>
                 <Menu />
                 <TopBar />
@@ -40,7 +32,7 @@ function App() {
             } />
             
             {/* Default redirect */}
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/dashboard" element={<Navigate to="/" replace />} />
           </Routes>
           <ToastContainer />
         </ThemeContextProvider>

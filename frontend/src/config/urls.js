@@ -1,6 +1,4 @@
-// URL Configuration
-const DASHBOARD_URL = process.env.NODE_ENV === 'production'
-  ? 'https://rapid-stocks-dashboard.vercel.app'
-  : 'http://localhost:3001';
+// URL Configuration - Local Development Only
+const DASHBOARD_URL = 'http://localhost:3001';
 
 export { DASHBOARD_URL };
