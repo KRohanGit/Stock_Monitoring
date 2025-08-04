@@ -57,7 +57,7 @@ const Dashboard = () => {
       <div className={`d-flex justify-content-between align-items-center p-3 border-bottom ${darkMode ? "bg-dark text-white" : "bg-white text-dark"}`}>
         <div>
           <h5 className="mb-0">Welcome, {username || "User"}</h5>
-          <small className="text-muted">Stock Trading Dashboard</small>
+          <small className="text-muted">Rapid Stocks Trading Platform</small>
         </div>
         <button 
           onClick={handleLogout}

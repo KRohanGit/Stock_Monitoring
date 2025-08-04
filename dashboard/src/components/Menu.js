@@ -43,7 +43,7 @@ const Menu = () => {
       >
         <div className="d-flex align-items-center">
           <img src="/assets/Logo.svg" alt="Logo" width="40" className="me-2" />
-          <span className={`fw-bold fs-5 ${darkMode ? 'text-light' : 'text-primary'}`}>Dashboard</span>
+          <span className={`fw-bold fs-5 ${darkMode ? 'text-light' : 'text-primary'}`}>Rapid Stocks</span>
         </div>
         <IconButton onClick={toggleTheme} size="small" sx={{ color: darkMode ? '#fff' : '#1976d2' }}>
           {darkMode ? <Brightness7 /> : <Brightness4 />}

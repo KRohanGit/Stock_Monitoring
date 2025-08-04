@@ -19,10 +19,11 @@ describe('Hero Component', ()=>{
         expect(heading).toBeInTheDocument();
     });
 
-    test('renders Get Started button', ()=>{
+    test('renders Get Started link', ()=>{
         render(<Hero />);
-        const getStartedButton = screen.getByRole('button', { name: /get started/i });
-        expect(getStartedButton).toBeInTheDocument();
+        const getStartedLink = screen.getByRole('link', { name: /get started/i });
+        expect(getStartedLink).toBeInTheDocument();
+        expect(getStartedLink).toHaveAttribute('href', 'http://localhost:3001/signup');
     });
 
     test('renders Watch Demo button', ()=>{

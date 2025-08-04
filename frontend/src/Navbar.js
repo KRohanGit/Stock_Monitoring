@@ -7,7 +7,7 @@ function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-light">
         <Link className="navbar-brand d-flex align-items-center" to="/">
           <img src="/assets/logo.svg" alt="Logo" width="50" className="me-2" />
-          <span className="fw-bold fs-4">apid Stocks</span>
+          <span className="fw-bold fs-4">Rapid Stocks</span>
         </Link>
 
         <button
