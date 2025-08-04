@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import axios from "axios";
+import { API_BASE_URL } from "../config/api";
 
 import GeneralContext from "./GeneralContext";
 
@@ -22,7 +23,7 @@ const BuyActionWindow = ({ uid }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("https://stock-monitoring-production.up.railway.app/newOrder", {
+      const response = await axios.post(`${API_BASE_URL}/newOrder`, {
         name: uid,
         qty: parseInt(stockQuantity),
         price: parseFloat(stockPrice),

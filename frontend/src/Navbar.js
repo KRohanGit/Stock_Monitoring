@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { DASHBOARD_URL } from './config/urls';
 
 function Navbar() {
   return (
@@ -27,7 +28,7 @@ function Navbar() {
             <li className="nav-item me-4">
               <a 
                 className="nav-link fw-semibold" 
-                href="http://localhost:3001/signup"
+                href={`${DASHBOARD_URL}/signup`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -37,7 +38,7 @@ function Navbar() {
             <li className="nav-item me-4">
               <a 
                 className="nav-link fw-semibold" 
-                href="http://localhost:3001/login"
+                href={`${DASHBOARD_URL}/login`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

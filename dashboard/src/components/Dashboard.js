@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import { API_BASE_URL } from "../config/api";
 
 import Apps from "./Apps";
 import Funds from "./Funds";
@@ -24,7 +25,7 @@ const Dashboard = () => {
     const getUsername = async () => {
       try {
         const { data } = await axios.post(
-          "https://stock-monitoring-production.up.railway.app/auth",
+          `${API_BASE_URL}/auth`,
           {},
           { withCredentials: true }
         );

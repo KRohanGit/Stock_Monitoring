@@ -1,4 +1,5 @@
 import React from 'react';
+import { DASHBOARD_URL } from '../../config/urls';
 
 function hero() {
   return (
@@ -19,7 +20,7 @@ function hero() {
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mb-4">
                 <a 
-                  href="http://localhost:3001/signup"
+                  href={`${DASHBOARD_URL}/signup`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary btn-lg px-4 py-3 rounded-pill shadow-sm text-decoration-none"

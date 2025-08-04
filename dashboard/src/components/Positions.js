@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../config/api";
 
 const Positions = () => {
   const [allPositions, setAllPositions] = useState([]);
@@ -10,7 +11,7 @@ const Positions = () => {
     const fetchPositions = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://stock-monitoring-production.up.railway.app/allPositions');
+        const response = await axios.get(`${API_BASE_URL}/allPositions`);
         console.log('Positions data:', response.data);
         setAllPositions(response.data);
         setError(null);

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { API_BASE_URL } from "../config/api";
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const ProtectedRoute = ({ children }) => {
       }
       try {
         const { data } = await axios.post(
-          "https://stock-monitoring-production.up.railway.app/auth",
+          `${API_BASE_URL}/auth`,
           {},
           { withCredentials: true }
         );
