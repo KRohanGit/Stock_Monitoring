@@ -21,7 +21,7 @@ const ProtectedRoute = ({ children }) => {
       }
       try {
         const { data } = await axios.post(
-          "http://localhost:3002/auth",
+          "https://stock-monitoring-production.up.railway.app/auth",
           {},
           { withCredentials: true }
         );

@@ -11,7 +11,7 @@ const Holdings = () => {
     const fetchHoldings = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:3002/allHoldings');
+        const response = await axios.get('https://stock-monitoring-production.up.railway.app/allHoldings');
         console.log('Holdings data:', response.data);
         setAllHoldings(response.data);
         setError(null);

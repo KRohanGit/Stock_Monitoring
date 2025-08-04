@@ -22,7 +22,7 @@ const BuyActionWindow = ({ uid }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3002/newOrder", {
+      const response = await axios.post("https://stock-monitoring-production.up.railway.app/newOrder", {
         name: uid,
         qty: parseInt(stockQuantity),
         price: parseFloat(stockPrice),

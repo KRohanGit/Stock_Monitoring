@@ -36,7 +36,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/auth/signup",
+        "https://stock-monitoring-production.up.railway.app/auth/signup",
         {
           ...inputValue,
         },

@@ -10,7 +10,7 @@ const Positions = () => {
     const fetchPositions = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:3002/allPositions');
+        const response = await axios.get('https://stock-monitoring-production.up.railway.app/allPositions');
         console.log('Positions data:', response.data);
         setAllPositions(response.data);
         setError(null);
