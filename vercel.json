@@ -1,0 +1,21 @@
+{
+  "name": "stock-monitoring",
+  "buildCommand": "cd dashboard && npm run build",
+  "outputDirectory": "dashboard/build",
+  "installCommand": "cd dashboard && npm install",
+  "devCommand": "cd dashboard && npm start",
+  "env": {
+    "REACT_APP_API_URL": "https://stock-monitoring-production.up.railway.app"
+  },
+  "build": {
+    "env": {
+      "REACT_APP_API_URL": "https://stock-monitoring-production.up.railway.app"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
