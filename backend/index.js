@@ -20,6 +20,8 @@ app.use(cors({
   origin: [
     "http://localhost:3000", // Frontend
     "http://localhost:3001", // Dashboard
+    "https://stock-monitoring-xi.vercel.app", // Vercel production URL
+    /\.vercel\.app$/, // Allow any Vercel subdomain
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,

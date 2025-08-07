@@ -1,6 +1,6 @@
 // API Configuration - Environment-based URLs
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? process.env.REACT_APP_API_URL || 'https://your-backend-url.railway.app'
+  ? process.env.REACT_APP_API_URL || 'https://stock-monitoring-production.up.railway.app'
   : 'http://localhost:3002';
 
 const DASHBOARD_URL = process.env.NODE_ENV === 'production'
