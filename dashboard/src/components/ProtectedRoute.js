@@ -6,7 +6,7 @@ import { API_BASE_URL } from "../config/api";
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies([]);
+  const [,] = useCookies([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 

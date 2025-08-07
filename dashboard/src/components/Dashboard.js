@@ -18,7 +18,7 @@ import { useTheme } from "../ThemeContext";
 const Dashboard = () => {
   const { darkMode } = useTheme();
   const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies([]);
+  const [, removeCookie] = useCookies([]);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
